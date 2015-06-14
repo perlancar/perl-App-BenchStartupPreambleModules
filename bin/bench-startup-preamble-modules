@@ -1,0 +1,30 @@
+#!perl
+
+use 5.010001;
+use strict;
+use warnings;
+
+use Benchmark::Command;
+
+Benchmark::Command::run(
+    undef,
+    {
+        'none'         => [$^X, "-e1"],
+        'Exporter'     => [$^X, "-e", "use Exporter"],
+        'Getopt::Long' => [$^X, "-e", "use Getopt::Long"],
+        'Carp'         => [$^X, "-e", "use Carp"],
+        'File::Spec'   => [$^X, "-e", "use File::Spec"],
+        'FindBin'      => [$^X, "-e", "use FindBin"],
+    },
+);
+
+# ABSTRACT: Benchmark startup time of various Perl modules commonly used in code preamble
+# PODNAME:
+
+=head1 SYNOPSIS
+
+ % bench-startup-preamble-modules
+
+Sample output:
+
+# COMMAND: perl bin/bench-startup-preamble-modules 2>&1
